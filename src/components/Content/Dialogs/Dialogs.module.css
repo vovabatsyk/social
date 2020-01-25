@@ -1,0 +1,36 @@
+.dialogsWrapper {
+    display: grid;
+    grid-template-areas:
+            "d l m";
+    grid-template-columns: 3fr 10px 8fr;
+    padding: 10px;
+}
+
+.dialogs {
+    grid-area: d;
+}
+
+.line {
+    grid-area: l;
+    width: 1px;
+    background-color: black;
+}
+
+.messages {
+    grid-area: m;
+}
+
+.item a {
+    text-decoration: none;
+    color: white;
+}
+
+.item a:hover {
+    color: gold;
+}
+
+.message {}
+
+.item a.active {
+    color: gold;
+}

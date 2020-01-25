@@ -1,0 +1,55 @@
+.navbar {
+    grid-area: nav;
+    background-image: linear-gradient(to right bottom, #904246, #6b3239, #47242a, #26161a, #000000);
+    padding: 20px;
+    box-shadow: -1px -1px 3px white;
+    margin: 10px 0 10px 10px;
+    border: 1px solid white;
+    /*border-top: none;*/
+    /*border-bottom: none;*/
+    /*width: 170px;*/
+}
+
+.links {
+    /*position: fixed;*/
+    left: 30px;
+    top: 20px;
+}
+
+.item {
+    margin-bottom: 15px;
+}
+
+.item a {
+    text-decoration: none;
+    color: white;
+}
+
+.item a.active {
+    color: gold;
+
+}
+
+.item:last-child {
+    margin: 30px 0 30px 0;
+}
+
+.item img {
+    margin-top: 5px;
+    width: 40px;
+}
+
+.item p {
+    margin: 0 0 0 5px;
+    font-size: 10px;
+    color: gold;
+}
+
+.item > div {
+    display: flex;
+    margin-top: 10px;
+}
+.item > div > div {
+    margin-right: 15px;
+    cursor: pointer;
+}

@@ -1,0 +1,30 @@
+html {
+    /*background-image: linear-gradient(to right top, #dccad4, #d8c0d4, #cfb8d7, #c1b1dc, #adace1, #9cb2eb, #86b8f3, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+    /*height: 100vh;*/
+    background: black;
+}
+
+.app-wrapper {
+    display: grid;
+    grid-template-areas: "nav header" "nav content";
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
+    grid-gap: 10px;
+    height: 100vh;
+}
+
+.app-wrapper-content {
+    grid-area: content;
+    background-image: linear-gradient(to right bottom, #3c3c3d, #424045, #4b444b, #56474f, #614a51, #644c51, #674f51, #6a5151, #665252, #625353, #5d5454, #595555);
+    box-shadow: -1px -1px 3px white;
+    border: 1px solid white;
+    margin: 0 10px 10px 0;
+    overflow-y: scroll;
+
+}
+
+.app-wrapper-content img {
+    width: 100%;
+}

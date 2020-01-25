@@ -1,0 +1,16 @@
+.header {
+    grid-area: header;
+    background-image: linear-gradient(to right bottom, #904246, #6b3239, #47242a, #26161a, #000000);
+    margin: 10px 10px 0 0;
+    box-shadow: -1px -1px 3px white;
+    border: 1px solid white;
+}
+
+.header img {
+    /*position: absolute;
+    top: -18px;
+    left: 37px;*/
+    width: 80px;
+    /*padding: 5px;*/
+    /*margin: 10px;*/
+}
