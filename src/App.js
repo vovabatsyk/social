@@ -8,7 +8,6 @@ import {Route} from 'react-router-dom'
 
 
 const App = (props) => {
-debugger
     return (
         <div className="app-wrapper">
             <Header/>
@@ -16,7 +15,9 @@ debugger
             <div className='app-wrapper-content'>
                 <Route path='/profile' render={() => <Profile
                     posts={props.state.profilePage.posts}
+                    newPostText={props.state.profilePage.newPostText}
                     addPost={props.addPost}
+                    updateNewPostText={props.updateNewPostText}
                 />}
                 />
                 <Route path='/dialogs' component={() => <Dialogs

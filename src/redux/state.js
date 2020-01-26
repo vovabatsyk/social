@@ -1,4 +1,6 @@
-import {rerenderEntireThree} from '../render'
+let rerenderEntireThree = () => {
+    console.log('State was changed')
+}
 
 let state = {
     profilePage: {
@@ -18,7 +20,8 @@ let state = {
                 message: 'React — відкрита JavaScript бібліотека для створення інтерфейсів користувача, яка покликана вирішувати проблеми часткового оновлення вмісту веб-сторінки, з якими стикаються в розробці односторінкових застосунків. Розробляється Facebook, Instagram і спільнотою індивідуальних розробників.',
                 likesCount: 7
             },
-        ]
+        ],
+        newPostText: 'webProger'
     },
     messagesPage: {
         dialogsData: [
@@ -37,18 +40,20 @@ let state = {
     }
 }
 
-export let addPost = (postMessage) => {
+export const addPost = () => {
     let newPost = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 0
     }
-
-    state.profilePage.posts.unshift(newPost)
+    if (state.profilePage.newPostText && state.profilePage.newPostText.replace(/\s+/g, '')) {
+        state.profilePage.posts.unshift(newPost)
+    }
+    state.profilePage.newPostText = ''
     rerenderEntireThree(state)
 }
 
-export let addMessage = (userMessage) => {
+export const addMessage = (userMessage) => {
     let newMessage = {
         id: 6,
         text: userMessage
@@ -58,9 +63,13 @@ export let addMessage = (userMessage) => {
     rerenderEntireThree(state)
 }
 
-export let updateNewPostText = (newText) => {
+export const updateNewPostText = (newText) => {
     state.profilePage.newPostText = newText
     rerenderEntireThree(state)
+}
+
+export const subscribe = (observer) => {
+    rerenderEntireThree = observer
 }
 
 export default state

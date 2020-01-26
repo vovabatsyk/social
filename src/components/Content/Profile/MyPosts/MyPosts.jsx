@@ -8,26 +8,32 @@ const MyPosts = (props) => {
 
     let newPostElement = React.createRef()
     let addPost = () => {
+        props.addPost()
+    }
+    let onPostChange = () => {
         let text = newPostElement.current.value
-        props.addPost(text)
-        newPostElement.current.value = ''
+        props.updateNewPostText(text)
     }
 
     return (
         <div className={classes.myPosts}>
             <h3>My posts</h3>
             <div>
-                <textarea placeholder='text...' wrap='off' ref={newPostElement}/><br/>
+                <textarea placeholder='text...'
+                          wrap='off' ref={newPostElement}
+                          onChange={onPostChange}
+                          value={props.newPostText}/><br/>
                 <div className={classes.subMain}>
                     <button
                         className={classes.button}
-                        onClick={ addPost }
-                    >Add post</button>
+                        onClick={addPost}
+                    >Add post
+                    </button>
                 </div>
                 {postsElements}
             </div>
         </div>
-            )
-            }
+    )
+}
 
-            export default MyPosts
+export default MyPosts
