@@ -39,19 +39,14 @@ let store = {
                 {id: 5, text: 'VueJS'}]
         }
     },
+
     getState() {
         return this._state
     },
-    addPost() {
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.unshift(newPost)
-        this._state.profilePage.newPostText = ''
-        this._rerender(this._state)
+    subscribe(observer) {
+        this._rerender = observer
     },
+
     addMessage(userMessage) {
         let newMessage = {
             id: 6,
@@ -61,13 +56,23 @@ let store = {
         this._state.messagesPage.messagesData.unshift(newMessage)
         this._rerender(this._state)
     },
-    updateNewPostText(newText) {
-        this._state.profilePage.newPostText = newText
-        this._rerender(this._state)
-    },
-    subscribe(observer) {
-        this._rerender = observer
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            }
+            this._state.profilePage.posts.unshift(newPost)
+            this._state.profilePage.newPostText = ''
+            this._rerender(this._state)
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText
+            this._rerender(this._state)
+        }
     }
+
 }
 
 export default store
