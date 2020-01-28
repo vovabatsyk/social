@@ -1,3 +1,6 @@
+const UPDATE_POST = 'UPDATE-NEW-POST-TEXT'
+const ADD_POST = 'ADD-POST'
+
 let store = {
     _rerender() {
         console.log('State was changed')
@@ -58,7 +61,7 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             let newPost = {
                 id: 5,
                 message: this._state.profilePage.newPostText,
@@ -67,12 +70,16 @@ let store = {
             this._state.profilePage.posts.unshift(newPost)
             this._state.profilePage.newPostText = ''
             this._rerender(this._state)
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UPDATE_POST) {
             this._state.profilePage.newPostText = action.newText
             this._rerender(this._state)
         }
     }
 
 }
+export const updateNewPostActionCreator = (text) => ({type: UPDATE_POST, newText: text})
+
+export const addPostActionCreator = () => ({type: ADD_POST})
+
 
 export default store
