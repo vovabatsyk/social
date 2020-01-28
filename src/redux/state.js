@@ -1,7 +1,6 @@
-const UPDATE_POST = 'UPDATE-NEW-POST-TEXT'
-const UPDATE_MESSAGE = 'UPDATE-NEW-MESSAGE-TEXT'
-const ADD_POST = 'ADD-POST'
-const ADD_MESSAGE = 'ADD-MESSAGE'
+import profileReducer from './profile-reducer'
+import dialogsReducer from './dialogs-reducer'
+import sidebarReducer from './sidebar-reducer'
 
 let store = {
     _rerender() {
@@ -26,9 +25,9 @@ let store = {
                     likesCount: 7
                 },
             ],
-            newPostText: ''
+            newPostText: 'proger'
         },
-        messagesPage: {
+        dialogsPage: {
             dialogsData: [
                 {id: 1, name: 'Lee'},
                 {id: 2, name: 'John'},
@@ -44,7 +43,8 @@ let store = {
                 {id: 5, text: 'VueJS'}
             ],
             newMessageText: ''
-        }
+        },
+        sidebar: {}
     },
 
     getState() {
@@ -55,7 +55,13 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === ADD_POST) {
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        this._rerender(this._state)
+
+       /* if (action.type === ADD_POST) {
             let newPost = {
                 id: 5,
                 message: this._state.profilePage.newPostText,
@@ -68,24 +74,16 @@ let store = {
             this._state.profilePage.newPostText = action.newText
             this._rerender(this._state)
         } else if (action.type === ADD_MESSAGE) {
-            let body = this._state.messagesPage.newMessageText
-            this._state.messagesPage.newMessageText = ''
-            this._state.messagesPage.messagesData.unshift({id: 7, text: body})
+            let body = this._state.dialogsPage.newMessageText
+            this._state.dialogsPage.messagesData.unshift({id: 7, text: body})
+            this._state.dialogsPage.newMessageText = ''
             this._rerender(this._state)
         } else if (action.type === UPDATE_MESSAGE) {
-            this._state.messagesPage.newMessageText = action.newText
+            this._state.dialogsPage.newMessageText = action.newText
             this._rerender(this._state)
-        }
+        }*/
     }
 
 }
-export const updateNewPostActionCreator = (text) => ({type: UPDATE_POST, newText: text})
-
-export const addPostActionCreator = () => ({type: ADD_POST})
-
-export const updateNewMessageActionCreator = (text) => ({type: UPDATE_MESSAGE, newText: text})
-
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
-
 
 export default store
