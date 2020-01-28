@@ -12,7 +12,7 @@ let rerenderEntireThree = (state) => {
             <App
                 state={state}
                 dispatch={store.dispatch.bind(store)}
-                addMessage={store.addMessage.bind(store)}
+                store={store}
             />
         </BrowserRouter>
         , document.getElementById('root'));

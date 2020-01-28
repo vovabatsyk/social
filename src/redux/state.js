@@ -1,5 +1,7 @@
 const UPDATE_POST = 'UPDATE-NEW-POST-TEXT'
+const UPDATE_MESSAGE = 'UPDATE-NEW-MESSAGE-TEXT'
 const ADD_POST = 'ADD-POST'
+const ADD_MESSAGE = 'ADD-MESSAGE'
 
 let store = {
     _rerender() {
@@ -24,7 +26,7 @@ let store = {
                     likesCount: 7
                 },
             ],
-            newPostText: 'webProger'
+            newPostText: ''
         },
         messagesPage: {
             dialogsData: [
@@ -39,7 +41,9 @@ let store = {
                 {id: 2, text: 'JS'},
                 {id: 3, text: 'ReactJS'},
                 {id: 4, text: 'Angular 8'},
-                {id: 5, text: 'VueJS'}]
+                {id: 5, text: 'VueJS'}
+            ],
+            newMessageText: ''
         }
     },
 
@@ -48,16 +52,6 @@ let store = {
     },
     subscribe(observer) {
         this._rerender = observer
-    },
-
-    addMessage(userMessage) {
-        let newMessage = {
-            id: 6,
-            text: userMessage
-        }
-
-        this._state.messagesPage.messagesData.unshift(newMessage)
-        this._rerender(this._state)
     },
 
     dispatch(action) {
@@ -73,6 +67,14 @@ let store = {
         } else if (action.type === UPDATE_POST) {
             this._state.profilePage.newPostText = action.newText
             this._rerender(this._state)
+        } else if (action.type === ADD_MESSAGE) {
+            let body = this._state.messagesPage.newMessageText
+            this._state.messagesPage.newMessageText = ''
+            this._state.messagesPage.messagesData.unshift({id: 7, text: body})
+            this._rerender(this._state)
+        } else if (action.type === UPDATE_MESSAGE) {
+            this._state.messagesPage.newMessageText = action.newText
+            this._rerender(this._state)
         }
     }
 
@@ -80,6 +82,10 @@ let store = {
 export const updateNewPostActionCreator = (text) => ({type: UPDATE_POST, newText: text})
 
 export const addPostActionCreator = () => ({type: ADD_POST})
+
+export const updateNewMessageActionCreator = (text) => ({type: UPDATE_MESSAGE, newText: text})
+
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
 
 
 export default store

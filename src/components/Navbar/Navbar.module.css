@@ -25,9 +25,13 @@
     color: white;
 }
 
+.item a:hover {
+    color: gold;
+    cursor: pointer;
+}
+
 .item a.active {
     color: gold;
-
 }
 
 .item:last-child {
