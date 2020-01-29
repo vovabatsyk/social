@@ -1,9 +1,25 @@
 const UPDATE_MESSAGE = 'UPDATE-NEW-MESSAGE-TEXT'
 const ADD_MESSAGE = 'ADD-MESSAGE'
 
-const dialogsReducer = (state, action) => {
+let initialState = {
+    dialogsData: [
+        {id: 1, name: 'Lee'},
+        {id: 2, name: 'John'},
+        {id: 3, name: 'Rocky'},
+        {id: 4, name: 'Alex'},
+        {id: 5, name: 'Andrew'}
+    ],
+    messagesData: [
+        {id: 1, text: 'CSS'},
+        {id: 2, text: 'JS'},
+        {id: 3, text: 'ReactJS'},
+        {id: 4, text: 'Angular 8'},
+        {id: 5, text: 'VueJS'}
+    ],
+    newMessageText: 'vova'
+}
 
-    // eslint-disable-next-line default-case
+const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_MESSAGE:
             let body = state.newMessageText
@@ -15,15 +31,8 @@ const dialogsReducer = (state, action) => {
             return state
         default:
             return state
-
     }
-    /*    if (action.type === ADD_MESSAGE) {
-            let body = state.newMessageText
-            state.messagesData.unshift({id: 7, text: body})
-            state.newMessageText = ''
-        } else if (action.type === UPDATE_MESSAGE) {
-            state.newMessageText = action.newText
-        }*/
+
 }
 
 export const updateNewMessageActionCreator = (text) => ({type: UPDATE_MESSAGE, newText: text})

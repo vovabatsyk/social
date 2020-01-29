@@ -42,7 +42,7 @@ let store = {
                 {id: 4, text: 'Angular 8'},
                 {id: 5, text: 'VueJS'}
             ],
-            newMessageText: ''
+            newMessageText: 'vova'
         },
         sidebar: {}
     },
