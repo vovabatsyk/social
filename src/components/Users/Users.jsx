@@ -1,8 +1,8 @@
-import React from 'react'
-import classes from './Users.module.css'
-import userPhoto from '../../assets/images/user.png'
+import React from "react"
+import classes from "./Users.module.css"
+import userPhoto from "../../assets/images/user.png"
 
-let Users = (props) => {
+let Users = props => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
   let pages = []
   for (let i = 1; i <= pagesCount; i++) {
@@ -42,16 +42,16 @@ let Users = (props) => {
                   }}
                 >
                   UnFollow
-                  </button>
+                </button>
               ) : (
-                  <button
-                    onClick={() => {
-                      props.follow(u.id)
-                    }}
-                  >
-                    Follow
-                  </button>
-                )}
+                <button
+                  onClick={() => {
+                    props.follow(u.id)
+                  }}
+                >
+                  Follow
+                </button>
+              )}
             </div>
           </span>
           <span>
