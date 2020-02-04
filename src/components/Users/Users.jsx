@@ -1,71 +1,100 @@
-import React from 'react'
-import classes from './Users.module.css'
+import React from "react";
+import classes from "./Users.module.css";
+import * as axios from "axios";
+import userPhoto from "../../assets/images/user.png";
 
-let Users = (props) => {
+class Users extends React.Component {
+  componentDidMount() {
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+      )
+      .then(response => {
+        this.props.setUsers(response.data.items);
+        this.props.setTotalUsersCount(response.data.totalCount);
+      });
+  }
 
-    if (props.users.length === 0) {
-        props.setUsers([
-                {
-                    id: 1,
-                    fullName: 'Volodymyr',
-                    photoURL: 'https://img.icons8.com/plasticine/2x/user.png',
-                    status: 'I am a boss',
-                    location: {city: 'Lvov', country: 'Ukraine'},
-                    followed: true
-                },
-                {
-                    id: 2,
-                    fullName: 'Ivan',
-                    photoURL: 'https://tr.rbxcdn.com/837931be3a05185708662ddf200ea36a/352/352/Avatar/Png',
-                    status: 'I am a developer',
-                    location: {city: 'Kiev', country: 'Ukraine'},
-                    followed: true
-                },
-                {
-                    id: 3,
-                    fullName: 'Natasha',
-                    photoURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Crystal_Clear_kdm_user_female.svg/1024px-Crystal_Clear_kdm_user_female.svg.png',
-                    status: 'I am a designer',
-                    location: {city: 'New York', country: 'USA'},
-                    followed: false
-                }
-            ]
-        )
+  onPageChanged = pageNumber => {
+    this.props.setCurrentPage(pageNumber);
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
+      )
+      .then(response => {
+        this.props.setUsers(response.data.items);
+      });
+  };
+
+  render() {
+    let pagesCount = Math.ceil(
+      this.props.totalUsersCount / this.props.pageSize
+    );
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+      pages.push(i);
     }
 
     return (
-        <div>
-            {
-                props.users.map(u => <div key={u.id}>
-                    <span>
-                        <div className={classes.userAva}>
-                            <img src={u.photoURL} alt="user"/>
-                        </div>
-                        <div>
-                            {u.followed
-                                ? <button onClick={() => {
-                                    props.unFollow(u.id)
-                                }}>UnFollow</button>
-                                : <button onClick={() => {
-                                    props.follow(u.id)
-                                }}>Follow</button>
-                            }
-                        </div>
-                    </span>
-                    <span>
-                        <span>
-                            <div>{u.fullName}</div><
-                            div>{u.status}</div>
-                        </span>
-                        <span>
-                            <div>{u.location.city}</div>
-                            <div>{u.location.country}</div>
-                        </span>
-                    </span>
-                </div>)
-            }
+      <div>
+        <div  className={classes.wrap}>
+          {pages.map(p => {
+            return (
+              <span
+                className={this.props.currentPage === p && classes.selected}
+                onClick={e => {
+                  this.onPageChanged(p);
+                }}
+              >
+                {p}
+              </span>
+            );
+          })}
         </div>
-    )
+        {this.props.users.map(u => (
+          <div key={u.id}>
+            <span>
+              <div className={classes.userAva}>
+                <img
+                  src={u.photos.small ? u.photos.small : userPhoto}
+                  alt="user"
+                />
+              </div>
+              <div>
+                {u.followed ? (
+                  <button
+                    onClick={() => {
+                      this.props.unFollow(u.id);
+                    }}
+                  >
+                    UnFollow
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      this.props.follow(u.id);
+                    }}
+                  >
+                    Follow
+                  </button>
+                )}
+              </div>
+            </span>
+            <span>
+              <span>
+                <div>{u.name}</div>
+                <div>{u.status}</div>
+              </span>
+              <span>
+                <div>{"u.location.city"}</div>
+                <div>{"u.location.country"}</div>
+              </span>
+            </span>
+          </div>
+        ))}
+      </div>
+    );
+  }
 }
 
-export default Users
+export default Users;

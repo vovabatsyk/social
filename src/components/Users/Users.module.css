@@ -1,3 +1,20 @@
 .userAva {
-    width: 100px;
+  width: 100px;
+}
+
+.selected {
+  font-weight: bold;
+}
+
+.wrap {
+  width: 200px;
+  height: 50px;
+  overflow: scroll;
+  margin: 0 auto;
+}
+
+.wrap > span {
+  margin: 2px;
+  border-right: 1px solid black;
+  cursor: pointer;
 }
