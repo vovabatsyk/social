@@ -3,6 +3,7 @@
     margin: 0 auto;
 }
 
-.ava {
+img.ava {
     width: 300px;
+    border-radius: 10px;
 }

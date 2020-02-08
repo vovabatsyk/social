@@ -15,10 +15,10 @@ const ProfileInfo = props => {
           alt="social"
         />
       </div>
-      <div className={classes.ava}>
-        <img src={props.profile.photos.large} alt="ava" />
-        ava + desc
-      </div>
+      <div >
+        <img src={props.profile.photos.large} className={classes.ava} alt="ava" />
+        <p>{props.profile.aboutMe}</p>
+        </div>
     </div>
   )
 }
